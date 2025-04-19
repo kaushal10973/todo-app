@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/kaushal10973/todo-app.git'
+                git branch: 'main', url: 'https://github.com/kaushal10973/todo-app.git'
             }
         }
 

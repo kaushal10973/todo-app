@@ -36,22 +36,13 @@ pipeline {
         }
     }
 
-   post {
-        success {
-            echo 'Build and Deployment Successful!'
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            // Optional email notification (set up SMTP in Jenkins first)
-            // mail to: 'your-email@example.com',
-            //      subject: "SUCCESS: ${env.JOB_NAME} Build #${env.BUILD_NUMBER}",
-            //      body: "Your pipeline ran successfully. View it here: ${env.BUILD_URL}"
-        }
-        failure {
-            echo 'Something went wrong.'
-            // Optional email notification
-            // mail to: 'your-email@example.com',
-            //      subject: "FAILURE: ${env.JOB_NAME} Build #${env.BUILD_NUMBER}",
-            //      body: "Something broke. Check here: ${env.BUILD_URL}"
-        }
+post {
+    success {
+        junit '**/target/surefire-reports/*.xml'
+        echo 'Build and Deployment Successful!'
     }
-
+    failure {
+        echo 'Something went wrong.'
+    }
 }
+

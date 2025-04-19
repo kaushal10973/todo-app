@@ -36,13 +36,14 @@ pipeline {
         }
     }
 
-post {
-    success {
-        junit '**/target/surefire-reports/*.xml'
-        echo 'Build and Deployment Successful!'
-    }
-    failure {
-        echo 'Something went wrong.'
+    post {
+        success {
+            junit '**/target/surefire-reports/*.xml'
+            echo 'Build and Deployment Successful!'
+        }
+        failure {
+            echo 'Something went wrong.'
+        }
     }
 }
 
